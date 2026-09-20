@@ -13,6 +13,7 @@
 
 <p align="center">
   <a href="https://trueopen.ai">Website</a> &middot;
+  <a href="https://github.com/TrueOpen/docs/blob/main/content/whitepaper.md">Whitepaper</a> &middot;
   <a href="https://github.com/TrueOpen/docs">Documentation</a> &middot;
   <a href="https://trueopen.ai/research.html">Research</a> &middot;
   <a href="https://trueopen.ai/roadmap.html">Roadmap</a>
@@ -30,6 +31,7 @@ Open-source model weights are only the beginning. Users also need confidence tha
 
 ## Explore TrueOpen
 
+- [Whitepaper](https://github.com/TrueOpen/docs/blob/main/content/whitepaper.md)
 - [Protocol documentation](https://github.com/TrueOpen/docs)
 - [Verification research](https://trueopen.ai/verification.html)
 - [Research and experimental reports](https://trueopen.ai/research.html)
