@@ -36,18 +36,6 @@ Re-running a generation costs as much as the generation itself, and a full crypt
 - **Logprob Majority-Consensus Verification (LMCV)** — three independently selected Verifiers each run one parallel teacher-forced prefill over the Worker's `input + output`, check every token's log-probability, rank and top-*k* membership (plus layer-0 expert routing for MoE models), commit their results, then reveal. Two matching results form the verdict.
 - **Sampled Layerwise Proofs (SLP)** — for fixed-point quantized models, the Worker commits every layer-group boundary before random sampling; the two end chunks and a random sample of inner chunks are proven cryptographically. The verifier checks the proof without the model weights and can escalate to a full proof over the same commitments.
 
-```mermaid
-flowchart LR
-  U[User] -->|signed task| W[Worker GPU]
-  W -->|output + logprobs / commitments| C[Chain]
-  C -->|VRF selects 3| V1[Verifier 1]
-  C --> V2[Verifier 2]
-  C --> V3[Verifier 3]
-  V1 & V2 & V3 -->|one prefill each, or proof check| CR[Commit → Reveal]
-  CR -->|2 of 3 agree| S[Settle & pay Worker]
-  CR -->|mismatch| P[Slash stake, re-verify or full proof]
-```
-
 **Measured cost** (single runs; conditions in the linked reports):
 
 | What | Result | Conditions |
