@@ -23,13 +23,15 @@
 
 ## What we are building
 
-| Verifiable inference | Private by design | Open coordination |
-| --- | --- | --- |
-| Verify that remote inference used the agreed model, precision, and computation. | Authorize tasks with cryptographic keys and protect inputs and results with encryption. | Coordinate distributed GPUs through efficient off-chain data paths and auditable protocol records. |
+An open GPU network for open-source models comes down to two problems. Everything else in the protocol exists to serve them.
 
-Open-source model weights are only the beginning. Users also need confidence that remote computation was performed as agreed, without giving up control of their data.
+| 1. Verification: validity and cost | 2. User privacy protection 🛡️ |
+| --- | --- |
+| Prove that remote inference used the agreed model, precision, and computation, while paying for only a fraction of the compute. | Keep who submitted a task and what it contained away from everyone who does not need it, without weakening verification or accountability. |
 
-## How verification works
+Open-source model weights are only the beginning. Users also need confidence that remote computation was performed as agreed, without giving up control of their identity or their data.
+
+## 1. How verification works
 
 Re-running a generation costs as much as the generation itself, and a full cryptographic proof of a large model is far more expensive. TrueOpen therefore uses two mechanisms that verify the *whole* answer while paying for only a *fraction* of the compute, and lets stake and penalties turn a partial detection probability into a full economic deterrent.
 
@@ -52,6 +54,36 @@ Why this is affordable: verification runs on a prefill, not a decode, so it is m
 
 Reports and code: [LMCV paper](https://github.com/TrueOpen/lmcv-experiments/blob/main/paper/LMCV.md) · [LMCV experiments and tools](https://github.com/TrueOpen/lmcv-experiments) · [SLP experiment report](https://github.com/TrueOpen/slp-experiments/blob/main/REPORT.md) · [SLP raw data](https://github.com/TrueOpen/slp-experiments) · [Verification overview](https://trueopen.ai/verification.html)
 
+## 2. How user privacy works
+
+Privacy has two layers: hiding *who* paid for a task, and hiding *what* the task contains. Service nodes stay publicly accountable in both.
+
+**Identity: a shielded pool and per-task keys**
+
+- Users deposit into a shared shielded pool and hold private notes. To fund a task, the user submits a zero-knowledge proof of spending authority and value conservation without revealing which note is spent; a unique nullifier prevents double spending.
+- When a task is accepted, its budget moves into escrow and change returns to the pool as new private notes; refunds at settlement return the same way, without the user coming online. Challenge bonds and verification budgets can also be paid from the pool.
+- The SDK creates a fresh control key and encryption recipient key for every task, and relayers submit transactions, so tasks never share a long-term user key or an on-chain session. Private mode also routes traffic through relays so the user's network origin is not tied to the request.
+- The model, budget, fees, execution status, and Worker, Verifier, and Builder identities stay public, and verification, settlement, and penalty rules are unchanged.
+
+**Content: optional encryption with phase-based key delivery**
+
+- Inputs and outputs are encrypted with authenticated encryption before upload. Builders store and relay only ciphertext; the project team, storage nodes, and other organizations cannot decrypt content through identity or administrative privilege.
+- Keys are never given to candidates. After the Worker is chosen with future-block randomness, the SDK wraps the data key for that Worker's authenticated encryption key; outputs are encrypted and decrypted chunk by chunk as they stream.
+- Verifiers receive the input, output, and token-record keys only after they are selected, and the key to the Worker's own comparison values only after they have committed, so encryption does not open a path to copying results.
+- Integrity is checked without decryption: Builders verify stored and streamed bytes against ciphertext commitments, while the SDK and Verifiers check content commitments after decrypting. Worker signatures, not the AES-GCM tag, bind each streamed chunk.
+
+**Who can see what**
+
+| Participant | Access |
+| --- | --- |
+| Public | Authorization records, commitments, and settlement records; no task content |
+| Builder | Ciphertext it stores and relays |
+| Selected Worker | The plaintext input it needs and the output and evidence it produces |
+| Selected Verifier | The data needed to verify; the Worker's comparison values only in the reveal phase |
+| Authorized reviewer | Data within a dispute's scope; opening a challenge alone grants no decryption right |
+
+**Limits we state up front.** Encryption cannot hide the input from the Worker that runs it, cannot revoke plaintext an authorized node has already read, and does not hide metadata such as data length and timing. Public deposit and withdrawal amounts and times may still offer linking clues. Users who choose encryption must keep their SDK online until verification ends to deliver keys on time. Commitments and settlement records stay on-chain permanently, and stored data is kept until its on-chain cleanup height.
+
 ## Explore TrueOpen
 
 - [Whitepaper (PDF)](https://github.com/TrueOpen/docs/blob/main/content/assets/TrueOpen_Whitepaper.pdf)
@@ -67,7 +99,7 @@ Reports and code: [LMCV paper](https://github.com/TrueOpen/lmcv-experiments/blob
 
 TrueOpen is in active research, protocol design, and development.
 
-Specifications and interfaces may evolve as verification methods, privacy mechanisms, and network coordination are tested. Production network access and compatible wallet integrations are not yet generally available.
+Specifications and interfaces may evolve as verification methods, privacy mechanisms, and network coordination are tested. The shielded pool and content encryption are specified in the whitepaper and under development; the current test network runs without them. Production network access and compatible wallet integrations are not yet generally available.
 
 ## Build with us
 
