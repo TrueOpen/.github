@@ -52,7 +52,7 @@ Re-running a generation costs as much as the generation itself, and a full crypt
 
 Why this is affordable: verification runs on a prefill, not a decode, so it is memory-bandwidth-cheap and parallel; only two of three Verifiers need to agree; proofs cover a sample rather than every layer; and because a Worker's stake is at risk on every audit, even a low per-audit detection probability makes cheating unprofitable over repeated tasks.
 
-Reports and code: [LMCV paper](https://github.com/TrueOpen/lmcv-experiments/blob/main/paper/LMCV.md) · [LMCV experiments and tools](https://github.com/TrueOpen/lmcv-experiments) · [SLP experiment report](https://github.com/TrueOpen/slp-experiments/blob/main/REPORT.md) · [SLP raw data](https://github.com/TrueOpen/slp-experiments) · [Verification overview](https://trueopen.ai/verification.html)
+Reports and code: [LMCV paper](https://github.com/TrueOpen/lmcv-experiments/blob/main/paper/LMCV.md) · [LMCV experiments and tools](https://github.com/TrueOpen/lmcv-experiments) · [SLP paper (arXiv:2609.27367)](https://arxiv.org/abs/2609.27367) · [SLP experiment report](https://github.com/TrueOpen/slp-experiments/blob/main/REPORT.md) · [SLP raw data](https://github.com/TrueOpen/slp-experiments) · [Verification overview](https://trueopen.ai/verification.html)
 
 ## 2. How user privacy works
 
@@ -90,6 +90,7 @@ Privacy has two layers: hiding *who* paid for a task, and hiding *what* the task
 - [Whitepaper (web)](https://github.com/TrueOpen/docs/blob/main/content/whitepaper.md)
 - [Protocol documentation](https://github.com/TrueOpen/docs)
 - [Verification research](https://trueopen.ai/verification.html)
+- [Seal, Then Sample: Sampled Layerwise Proofs for Verifiable LLM Inference from GPT-2 to 70B (arXiv:2609.27367)](https://arxiv.org/abs/2609.27367)
 - [Research and experimental reports](https://trueopen.ai/research.html)
 - [End-to-end task flow](https://trueopen.ai/task-flow.html)
 - [Performance and scaling](https://trueopen.ai/scaling.html)
