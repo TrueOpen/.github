@@ -21,6 +21,13 @@
 
 ---
 
+## Get started
+
+| Register a model | Register a GPU | Use the API |
+| --- | --- | --- |
+| Publish an open-source model and its Profile so the network can serve and verify it. | Bring a GPU node online as a Worker or Verifier and earn from the tasks it serves. | Submit AI tasks from your application and read verified results. |
+| [Register a model →](https://github.com/TrueOpen/docs/blob/main/content/providers/model-and-node-activation.md#1-register-the-profile) | [Register a GPU →](https://github.com/TrueOpen/docs/blob/main/content/providers/quickstart.md) | [Use the API →](https://github.com/TrueOpen/docs/blob/main/content/developers/application-integration.md) · [SDK](https://github.com/TrueOpen/trueopen-sdk) |
+
 ## What we are building
 
 An open GPU network for open-source models comes down to two problems. Everything else in the protocol exists to serve them.
