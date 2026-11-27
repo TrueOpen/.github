@@ -4,15 +4,16 @@
   </a>
 </p>
 
-<h1 align="center">Verifiable and Private AI Inference</h1>
+<h1 align="center">Open GPU network. Verifiable inference. Revenue for open-model creators.</h1>
 
 <p align="center">
-  TrueOpen is an open GPU network for serving open-source models with
-  verifiable computation and privacy protection.
+  一个提供可验证推理的开放算力网络，为开源模型作者创造收入
 </p>
 
 <p align="center">
   <a href="https://trueopen.ai">Website</a> &middot;
+  <a href="https://github.com/TrueOpen">GitHub</a> &middot;
+  <a href="https://huggingface.co/datasets/TrueOpenAI/lmcv-experiments">Hugging Face</a> &middot;
   <a href="https://github.com/TrueOpen/docs/blob/main/content/assets/TrueOpen_Whitepaper.pdf">Whitepaper</a> &middot;
   <a href="https://github.com/TrueOpen/docs">Documentation</a> &middot;
   <a href="https://trueopen.ai/research.html">Research</a> &middot;
